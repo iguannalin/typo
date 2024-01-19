@@ -24,4 +24,6 @@ window.addEventListener("load", () => {
     char.appendChild(spanR);
     container.appendChild(char);
   });
+
+  setInterval(() => location.reload(), 2500);
 });
