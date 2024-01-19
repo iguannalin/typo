@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
   const computeLoop = (iteration, fx) => range(iteration).forEach((k,i) => fx(i));
   const getRadical = (i) => String.fromCodePoint(`0x2f${counter[Math.floor(i/10)%14]}${counter[Math.floor(i/100)%16]}`);
 
-  computeLoop(25, () => {
+  computeLoop(Math.floor(window.innerHeight/12), () => {
     const randomIndex = getRandomInt(0, 214);
     const char = document.createElement("div");
     const spanL = document.createElement("span");
