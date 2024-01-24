@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
   const computeLoop = (iteration, fx) => range(iteration).forEach((k,i) => fx(i));
   const getRadical = (i) => String.fromCodePoint(`0x2f${counter[Math.floor(i/10)%14]}${counter[Math.floor(i/100)%16]}`);
 
-  computeLoop(Math.floor(window.innerHeight/12), () => {
+  computeLoop(Math.floor(window.innerHeight/55), () => {
     const randomIndex = getRandomInt(0, 214);
     const char = document.createElement("div");
     const spanL = document.createElement("span");
@@ -18,6 +18,8 @@ window.addEventListener("load", () => {
     char.className = "character";
     spanL.className = "left";
     spanR.className = "right";
+    // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])-1+"px", 250);
+    // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])+2+"px", 300);
     spanL.innerText = getRadical(randomIndex);
     spanR.innerText = getRadical(randomIndex);
     char.appendChild(spanL);
@@ -25,5 +27,5 @@ window.addEventListener("load", () => {
     container.appendChild(char);
   });
 
-  setInterval(() => location.reload(), 2500);
+  // setInterval(() => location.reload(), 2500);
 });
