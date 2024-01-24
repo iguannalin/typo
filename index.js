@@ -10,22 +10,26 @@ window.addEventListener("load", () => {
   const computeLoop = (iteration, fx) => range(iteration).forEach((k,i) => fx(i));
   const getRadical = (i) => String.fromCodePoint(`0x2f${counter[Math.floor(i/10)%14]}${counter[Math.floor(i/100)%16]}`);
 
-  computeLoop(Math.floor(window.innerHeight/55), () => {
-    const randomIndex = getRandomInt(0, 214);
-    const char = document.createElement("div");
-    const spanL = document.createElement("span");
-    const spanR = document.createElement("span");
-    char.className = "character";
-    spanL.className = "left";
-    spanR.className = "right";
-    // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])-1+"px", 250);
-    // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])+2+"px", 300);
-    spanL.innerText = getRadical(randomIndex);
-    spanR.innerText = getRadical(randomIndex);
-    char.appendChild(spanL);
-    char.appendChild(spanR);
-    container.appendChild(char);
+  computeLoop(12, () => {
+    const bar = document.createElement("div");
+    bar.className = "bar";
+    computeLoop(Math.floor(window.innerHeight/55), () => {
+      const randomIndex = getRandomInt(0, 214);
+      const char = document.createElement("div");
+      const spanL = document.createElement("span");
+      const spanR = document.createElement("span");
+      char.className = "character";
+      spanL.className = "left";
+      spanR.className = "right";
+      // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])-1+"px", 250);
+      // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])+2+"px", 300);
+      spanL.innerText = getRadical(randomIndex);
+      spanR.innerText = getRadical(randomIndex);
+      char.appendChild(spanL);
+      char.appendChild(spanR);
+      bar.appendChild(char);
+    });
+    container.appendChild(bar);
   });
-
   // setInterval(() => location.reload(), 2500);
 });
