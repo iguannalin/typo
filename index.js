@@ -9,8 +9,26 @@ window.addEventListener("load", () => {
   let range = n => [...Array(n).keys()];
   const computeLoop = (iteration, fx) => range(iteration).forEach((k,i) => fx(i));
   const getRadical = (i) => String.fromCodePoint(`0x2f${counter[Math.floor(i/10)%14]}${counter[Math.floor(i/100)%16]}`);
+  const shape = [3,4,6,7,9,9,10,9,9,7,6,4];
+  const chHeight = 16;
+  const timeInterval = 250;
 
-  computeLoop(12, () => {
+  function disperse(elem1, elem2=null) {
+    switch(Math.random()>0.5) {
+      case false:
+        elem1.style.marginTop = +(elem1.style.marginTop.split("px")[0])-0.5+"px";
+        // elem2.style.marginTop = +(elem2.style.marginTop.split("px")[0])-1+"px";
+        break;
+      case true:
+        elem1.style.marginTop = +(elem1.style.marginTop.split("px")[0])+0.5+"px";
+        // elem2.style.marginTop = +(elem2.style.marginTop.split("px")[0])+1+"px";
+        break;
+      default:
+        break;
+    }
+  }
+
+  computeLoop(12, (index) => {
     const bar = document.createElement("div");
     bar.className = "bar";
     computeLoop(Math.floor(window.innerHeight/55), () => {
@@ -21,15 +39,15 @@ window.addEventListener("load", () => {
       char.className = "character";
       spanL.className = "left";
       spanR.className = "right";
-      // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])-1+"px", 250);
-      // setInterval(() => spanR.style.marginTop = +(spanR.style.marginTop.split("px")[0])+2+"px", 300);
+      setInterval(() => disperse(spanL,spanR), timeInterval);
+      setInterval(() => disperse(spanR), timeInterval);
       spanL.innerText = getRadical(randomIndex);
       spanR.innerText = getRadical(randomIndex);
       char.appendChild(spanL);
       char.appendChild(spanR);
       bar.appendChild(char);
     });
+    bar.style.maxHeight = shape[index]*chHeight+"px";
     container.appendChild(bar);
   });
-  // setInterval(() => location.reload(), 2500);
 });
